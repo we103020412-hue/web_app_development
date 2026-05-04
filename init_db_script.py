@@ -1,0 +1,11 @@
+import os
+import sqlite3
+
+os.makedirs('instance', exist_ok=True)
+db_path = os.path.join('instance', 'database.db')
+schema_path = os.path.join('database', 'schema.sql')
+
+with sqlite3.connect(db_path) as conn:
+    with open(schema_path, 'r', encoding='utf-8') as f:
+        conn.executescript(f.read())
+print("Database initialized.")
